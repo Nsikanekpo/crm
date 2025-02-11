@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.forms.widgets import PasswordInput, TextInput
 
-# - Register/Craete a user
+# - Register/Create a user
 
 class CreateUserForm(UserCreationForm):
 
