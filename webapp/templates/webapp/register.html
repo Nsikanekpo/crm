@@ -1,5 +1,7 @@
 {% extends 'webapp/base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 
    <body>
@@ -17,7 +19,7 @@
 
                 {% csrf_token %}
 
-                {{form.as_p}}
+                {{form|crispy}}
 
                 <br>
 
@@ -29,7 +31,7 @@
 
                 <div class="text-center">
 
-                    <p> Already have an account? </p> <a href="{% url '' %}"> Login </a>
+                    <p> Already have an account? </p> <a href="{% url 'my-login' %}"> Login </a>
 
 
                 </div>
