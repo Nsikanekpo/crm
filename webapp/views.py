@@ -5,6 +5,8 @@ from .forms import CreateUserForm, LoginForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 
+from django.contrib.auth.decorators import login_required
+
 # - homepage
 
 def home(request):
@@ -26,7 +28,7 @@ def register(request):
 
             form.save()
 
-            return redirect('my-login')
+            return redirect("my-login")
 
 
     context = {'form':form}
@@ -46,7 +48,7 @@ def my_login(request):
         if form.is_valid():
 
             username = request.POST.get('username')
-            password = request.Post.get('password')
+            password = request.POST.get('password')
 
             user = authenticate(request, username=username, password=password)
 
@@ -54,8 +56,36 @@ def my_login(request):
 
                 auth.login(request, user)
 
-                #return redirect('')
+                return redirect("dashboard")
 
     context = {'form':form}
 
     return render(request, 'webapp/my-login.html', context=context)
+
+
+
+# - Dashboard
+
+@login_required(login_url='my-login')
+def dashboard(request):
+
+    return render(request, 'webapp/dashboard.html')
+
+
+
+
+
+
+
+
+
+
+
+
+# - user logout
+
+def user_logout(request):
+
+    auth.logout(request)
+
+    return redirect("my-login")
