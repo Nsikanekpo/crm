@@ -6,11 +6,15 @@
 
         <strong>
 
+            &nbsp; &nbsp;
+
             {{record.last_name|upper}}
 
             {{record.first_name}}
 
         </strong>
+
+        <hr class="w-90 mx-auto my-3" style="border-top: 1px solid #000;">
 
         <div class="card-body">
 
@@ -35,5 +39,17 @@
 
 
     </div>
+
+    <br>
+
+    <a href="{% url 'dashboard' %}" class="btn btn-secondry"> Return </a>
+
+    &nbsp;
+
+    <a href="{% url 'update-record' record.id %}" class="btn btn-info"> Update record </a>
+
+    &nbsp;
+
+    <a href="{% url 'delete-record' record.id %}" class="btn btn-danger"> Delete </a>
 
 {% endblock %}
