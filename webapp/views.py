@@ -9,6 +9,11 @@ from django.contrib.auth.decorators import login_required
 
 from . models import Record
 
+from django.contrib import messages
+
+
+
+
 # - homepage
 
 def home(request):
@@ -29,6 +34,8 @@ def register(request):
         if form.is_valid():
 
             form.save()
+
+            messages.success(request, "Account created successfully!")
 
             return redirect("my-login")
 
@@ -57,6 +64,8 @@ def my_login(request):
             if user is not None:
 
                 auth.login(request, user)
+
+                messages.success(request, "You have loggedIn!")
 
                 return redirect("dashboard")
 
@@ -92,6 +101,8 @@ def create_record(request):
 
             form.save()
 
+            messages.success(request, "Your record was created!")
+
             return redirect("dashboard")
         
     context = {'form': form}
@@ -114,6 +125,8 @@ def update_record(request, pk):
         if form.is_valid():
 
             form.save()
+
+            messages.success(request, "Your record was updated successfully!")
 
             return redirect("dashboard")
         
@@ -142,21 +155,9 @@ def delete_record(request, pk):
 
     record.delete()
 
+    messages.success(request, "Your record was deleted successfully!")
+
     return redirect("dashboard")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # - user logout
@@ -164,5 +165,7 @@ def delete_record(request, pk):
 def user_logout(request):
 
     auth.logout(request)
+
+    messages.success(request, "Logout successful!")
 
     return redirect("my-login")
