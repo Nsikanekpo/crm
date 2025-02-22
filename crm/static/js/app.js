@@ -1,12 +1,9 @@
 
 // message/Notification timer
 
-var message_timeout = document.getElementById("message-timer");
-
-setTimeout(function()
-
-{
-
-    message_timeout.style.display = "none";
-
-},3000);
+setTimeout(function () {
+    let messages = document.querySelectorAll("#message-timer");
+    messages.forEach((msg) => {
+        msg.style.display = "none";
+    });
+}, 3000); // Adjust time (in milliseconds) as needed
