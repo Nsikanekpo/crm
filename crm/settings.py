@@ -12,12 +12,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-hb8n5z&b5i@^au%39bex6h5ky7w32pi&a9r*duh3nr6w$0j!=a'
+
+SECRET_KEY = os.getenv("SECRET_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['crm-i8gl.onrender.com']
 
 
 # Application definition
@@ -73,15 +75,11 @@ WSGI_APPLICATION = 'crm.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'crm_db',  
-        'USER': 'postgres',  # Default PostgreSQL user
-        'PASSWORD': '194175Ab', 
-        'HOST': 'localhost',  # Running on your local machine
-        'PORT': '5432',  # Default PostgreSQL port
-    }
+    
+"default": dj_database_url.config(default=os.getenv("DATABASE_URL"), conn_max_age=600)
+
 }
+
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -124,7 +122,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 
-STATICFILES_DIRS = [BASE_DIR / 'CRM'/ 'static']
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 
 
