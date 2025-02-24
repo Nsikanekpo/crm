@@ -1,0 +1,16 @@
+
+.form-layout{
+    
+    border: 1px solid #888; 
+    border-radius: 15px;
+    width: 500px;
+    background-color: #f0f0f0; 
+    padding: 20px;
+
+}
+
+.message-text{
+
+    color : white;
+
+}
